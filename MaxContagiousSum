@@ -1,0 +1,38 @@
+
+public class MaxContagiousSum {
+	
+	public static void main(String args[]){
+		
+		int[] input={-2,11,-4,13,-5,2};//->20  {1,-3,4,-2,-1,6};//
+		
+		System.out.println(findMaxContSum(input));
+	}
+
+	public static int findMaxContSum(int[] input) {
+		int sumEndingHere = 0, sumSoFar = 0;
+		int start_f=0,end_f=0;
+		int start_t=0,end_t=0;
+
+		for (int i = 0; i < input.length; i++) {
+			sumEndingHere = sumEndingHere + input[i];
+				
+			if (sumEndingHere < 0) {
+				sumEndingHere = 0;
+				start_t=end_t=1+i;
+				continue;
+			} else {
+				end_t=i;
+			}
+
+			if(sumEndingHere > sumSoFar){
+				  sumSoFar=sumEndingHere;
+				  start_f=start_t;
+				  end_f=end_t;
+			}
+		}
+		
+		System.out.println("From " +input[start_f] +" to "+input[end_f]);
+
+		return sumSoFar;
+	}
+}
